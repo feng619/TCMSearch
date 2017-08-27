@@ -1,14 +1,26 @@
 // @flow
 import React, { Component } from "react";
-import SHL from "./data/ShangHanLun";
+import SHL from "./data/shangHanLun";
+import SNBCJ from "./data/shenNongBenCaoJing";
+import JKYL from "./data/jinKuiYaoLue";
 import BHYJ from "./data/biHuaYiJing";
-import { herbsOptions, symptomOptions } from "./data/SearchWords";
+import ZYLCESWN from "./data/zhongYiLinChuangErShiWuNian";
+import {
+  herbsOptions,
+  symptomOptions,
+  prescriptionOptions
+} from "./data/searchWords";
 
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
+import AppBar from "material-ui/AppBar";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
-import { lightGreen } from "material-ui/colors";
+import { FormGroup, FormControlLabel } from "material-ui/Form";
+import Checkbox from "material-ui/Checkbox";
+import TextField from "material-ui/TextField";
 
 import "../../style/components/tcm/tcm-search.css";
 
@@ -16,7 +28,14 @@ class TCMSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      booksArr: [SHL, BHYJ],
+      // for checkbox
+      checkedSHL: true,
+      checkedSNBCJ: true,
+      checkedJKYL: true,
+      checkedBHYJ: true,
+      checkedZYLCESWN: true,
+      // for search
+      booksArr: [SHL, SNBCJ, JKYL, BHYJ, ZYLCESWN],
       namesArr: null,
       // herb
       selectHerbsValue: null,
@@ -24,9 +43,18 @@ class TCMSearch extends Component {
       // symptom
       selectSymptomsValue: null,
       selectSymptomNamesArr: null,
+      // prescription
+      selectPrescriptionsValue: null,
+      selectPrescriptionNamesArr: null,
+      // free input
+      selectFreeInput: "",
       // result
       result: null
     };
+  }
+
+  handleCheckboxChange(checkedBookName, event, tf) {
+    this.setState({ [checkedBookName]: tf });
   }
 
   onSelectHerbsChange(cv) {
@@ -51,8 +79,30 @@ class TCMSearch extends Component {
     });
   }
 
+  onSelectPrescriptionsChange(cv) {
+    var selectPrescriptionsArr = prescriptionOptions.find(el => {
+      return el.value === cv.value;
+    });
+
+    this.setState({
+      selectPrescriptionsValue: cv.value,
+      selectPrescriptionNamesArr: selectPrescriptionsArr.nameArr
+    });
+  }
+
   onSearch(searchType) {
-    const { booksArr, selectHerbNamesArr, selectSymptomNamesArr } = this.state;
+    const {
+      checkedSHL,
+      checkedSNBCJ,
+      checkedJKYL,
+      checkedBHYJ,
+      checkedZYLCESWN,
+      booksArr,
+      selectHerbNamesArr,
+      selectSymptomNamesArr,
+      selectPrescriptionNamesArr,
+      selectFreeInput
+    } = this.state;
     var namesArr = [];
 
     // 決定搜索種類要用的 nameArr
@@ -62,12 +112,31 @@ class TCMSearch extends Component {
     } else if (searchType === "search_symptom") {
       if (!selectSymptomNamesArr) return;
       namesArr = selectSymptomNamesArr;
+    } else if (searchType === "search_prescription") {
+      if (!selectPrescriptionNamesArr) return;
+      namesArr = selectPrescriptionNamesArr;
+    } else if (searchType === "search_free") {
+      if (!selectFreeInput) return;
+      namesArr = [selectFreeInput];
     }
+
+    // 過濾要搜尋的書本
+    var filteredBookArr = [],
+      tfArr = [
+        checkedSHL,
+        checkedSNBCJ,
+        checkedJKYL,
+        checkedBHYJ,
+        checkedZYLCESWN
+      ];
+    booksArr.map((book, i) => {
+      if (tfArr[i]) filteredBookArr.push(book);
+    });
 
     var result = { namesArr, booksData: [] };
 
     // 每本書都要過濾
-    booksArr.map(book => {
+    filteredBookArr.map(book => {
       var { bookName, haveChapter, contentArr } = book;
       var content = [];
 
@@ -152,14 +221,14 @@ class TCMSearch extends Component {
                 });
 
                 return (
-                  <div key={sentence}>
+                  <div key={sentence} className="sentence">
                     {hlSentence.map((cv, k, arr) => {
                       if (k !== arr.length - 1) {
                         // 句中
                         return (
                           <span key={cv}>
                             {cv}
-                            <span style={{ color: "red" }}>
+                            <span className="highlight-fonts">
                               {name}
                             </span>
                           </span>
@@ -188,7 +257,7 @@ class TCMSearch extends Component {
             {bookName}
           </h2>
           <div className={`lists-block ${haveChapter ? "haveChapter" : ""}`}>
-            {lists}
+            {lists.length === 0 ? <p className="no-data">本書查無此關鍵字</p> : lists}
           </div>
         </div>
       );
@@ -196,10 +265,97 @@ class TCMSearch extends Component {
   }
 
   render() {
-    const { selectHerbsValue, selectSymptomsValue } = this.state;
-
+    const {
+      checkedSHL,
+      checkedSNBCJ,
+      checkedJKYL,
+      checkedBHYJ,
+      checkedZYLCESWN,
+      selectHerbsValue,
+      selectSymptomsValue,
+      selectPrescriptionsValue,
+      selectFreeInput
+    } = this.state;
+    console.log(selectFreeInput);
     return (
       <div id="tcm-search-wrapper">
+        <AppBar position="static" className="appbar">
+          <Toolbar>
+            <Typography type="title" color="inherit">
+              小宇宙中醫古文查詢系統
+            </Typography>
+          </Toolbar>
+        </AppBar>
+
+        <div id="option-block">
+          <h2>搜尋選項</h2>
+          <h4>請勾選要納入搜尋的書籍</h4>
+
+          <FormGroup row className="checkbox-row">
+            <FormControlLabel
+              control={
+                <Checkbox
+                  className={checkedSHL ? "checked-style" : ""}
+                  checked={checkedSHL}
+                  onChange={this.handleCheckboxChange.bind(this, "checkedSHL")}
+                  value="checkedSHL"
+                />
+              }
+              label="傷寒論"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  className={checkedSNBCJ ? "checked-style" : ""}
+                  checked={checkedSNBCJ}
+                  onChange={this.handleCheckboxChange.bind(
+                    this,
+                    "checkedSNBCJ"
+                  )}
+                  value="checkedSNBCJ"
+                />
+              }
+              label="神農本草經"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  className={checkedJKYL ? "checked-style" : ""}
+                  checked={checkedJKYL}
+                  onChange={this.handleCheckboxChange.bind(this, "checkedJKYL")}
+                  value="checkedJKYL"
+                />
+              }
+              label="金匱要略"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  className={checkedBHYJ ? "checked-style" : ""}
+                  checked={checkedBHYJ}
+                  onChange={this.handleCheckboxChange.bind(this, "checkedBHYJ")}
+                  value="checkedBHYJ"
+                />
+              }
+              label="筆花醫鏡"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  className={checkedZYLCESWN ? "checked-style" : ""}
+                  checked={checkedZYLCESWN}
+                  onChange={this.handleCheckboxChange.bind(
+                    this,
+                    "checkedZYLCESWN"
+                  )}
+                  value="checkedZYLCESWN"
+                />
+              }
+              label="中醫臨床廿五年"
+            />
+          </FormGroup>
+        </div>
+
         <div id="select-block">
           <div className="search-row">
             <Select
@@ -237,7 +393,42 @@ class TCMSearch extends Component {
               症狀查詢
             </Button>
           </div>
+          <div className="search-row">
+            <Select
+              className="select"
+              name="select-prescriptions"
+              value={selectPrescriptionsValue}
+              placeholder="請選擇方劑"
+              options={prescriptionOptions}
+              clearable={false}
+              onChange={this.onSelectPrescriptionsChange.bind(this)}
+            />
+            <Button
+              raised
+              className="gbtn"
+              onClick={this.onSearch.bind(this, "search_prescription")}
+            >
+              方劑查詢
+            </Button>
+          </div>
+
+          <div className="search-row freeinput">
+            <TextField
+              label="請輸入查詢關鍵字"
+              className="free-input"
+              value={selectFreeInput}
+              onChange={e => this.setState({ selectFreeInput: e.target.value })}
+            />
+            <Button
+              raised
+              className="gbtn"
+              onClick={this.onSearch.bind(this, "search_free")}
+            >
+              自訂查詢
+            </Button>
+          </div>
         </div>
+
         <div id="result-block">
           {this.renderResult()}
         </div>
@@ -247,5 +438,3 @@ class TCMSearch extends Component {
 }
 
 export default TCMSearch;
-
-// 待辦事項 整理 BHYJ 變成 SHL 的兩層物件的格式 / 去掉 booksArr.pop();

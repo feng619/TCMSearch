@@ -2,6 +2,10 @@
   "name": "ReactAppStarter",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=7.0.0 <8.0.0"
+  },
+  "engineStrict": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
     "history": "^4.6.1",

@@ -2488,9 +2488,6 @@ var ShenNongBenCaoJing = `
 
 var SNBCJ = { bookName: "神農本草經", haveChapter: false, contentArr: [] };
 
-// 神農本草經沒有章節，所以都用空字串就好
-var chapter = "";
-
 ShenNongBenCaoJing.split("***").map(block => {
   var section = { chapter: "", title: "", sentences: [] };
 

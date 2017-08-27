@@ -2504,9 +2504,6 @@ var JinKuiYaoLue = `
 
 var JKYL = { bookName: "金匱要略", haveChapter: false, contentArr: [] };
 
-// 金匱要略沒有章節，所以都用空字串就好
-var chapter = "";
-
 JinKuiYaoLue.split("***").map(block => {
   var section = { chapter: "", title: "", sentences: [] };
 

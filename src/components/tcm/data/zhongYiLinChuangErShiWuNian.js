@@ -923,9 +923,6 @@ var ZhongYiLinChuangErShiWuNian = `
 
 var ZYLCESWN = { bookName: "中醫臨床廿五年", haveChapter: false, contentArr: [] };
 
-// 中醫臨床廿五年沒有章節，所以都用空字串就好
-var chapter = "";
-
 ZhongYiLinChuangErShiWuNian.split("***").map(block => {
   var section = { chapter: "", title: "", sentences: [] };
 

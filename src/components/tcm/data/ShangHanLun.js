@@ -411,9 +411,6 @@ var ShanghanLun = `
 
 var SHL = { bookName: "傷寒論", haveChapter: false, contentArr: [] };
 
-// 傷寒論沒有章節，所以都用空字串就好
-var chapter = "";
-
 ShanghanLun.split("***").map(block => {
   var section = { chapter: "", title: "", sentences: [] };
 

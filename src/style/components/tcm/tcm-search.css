@@ -6,6 +6,13 @@
     letter-spacing: 3px; }
     #tcm-search-wrapper .appbar h2 {
       font-size: 22px; }
+    #tcm-search-wrapper .appbar #logo {
+      width: 32px;
+      height: 32px;
+      margin-right: 15px; }
+      #tcm-search-wrapper .appbar #logo img {
+        width: 100%;
+        height: 100%; }
   #tcm-search-wrapper #option-block {
     position: relative;
     padding: 0 15px; }
@@ -26,49 +33,62 @@
       padding-left: 15px; }
     #tcm-search-wrapper #option-block .checkbox-row {
       padding-left: 30px; }
+      #tcm-search-wrapper #option-block .checkbox-row h4 {
+        height: 53px;
+        line-height: 50px;
+        margin: 0;
+        padding-right: 30px; }
       #tcm-search-wrapper #option-block .checkbox-row .checked-style {
         color: #558b2f; }
-  #tcm-search-wrapper #select-block {
+  #tcm-search-wrapper .select-block {
     width: 100%;
     position: relative;
-    margin: 15px 0 35px;
+    margin: 20px 0 45px;
     padding: 0 15px;
     text-align: center; }
-    #tcm-search-wrapper #select-block:before {
+    #tcm-search-wrapper .select-block:before {
       content: '';
       width: 90%;
       height: 1px;
       position: absolute;
-      bottom: -15px;
+      bottom: -20px;
       left: 5%;
       background-image: linear-gradient(53deg, #fefefe 0px, #fefefe 4px, #558b2f 4px, #558b2f 6px, #fefefe 6px, #fefefe 12px, #558b2f 12px, #558b2f 14px, #fefefe 14px, #fefefe 20px, #558b2f 20px, #558b2f 22px, #fefefe 22px, #fefefe 24px);
       background-size: 20px 13px; }
-    #tcm-search-wrapper #select-block .search-row {
+    #tcm-search-wrapper .select-block.multi > p {
+      text-align: left;
+      padding-left: 30px; }
+    #tcm-search-wrapper .select-block.multi .search-row {
+      width: 80%; }
+    #tcm-search-wrapper .select-block h4 {
+      text-align: left;
+      padding-left: 15px; }
+    #tcm-search-wrapper .select-block .search-row {
       width: 50%;
       min-width: 390px;
       display: inline-flex;
       justify-content: center;
       margin: 10px auto; }
-      #tcm-search-wrapper #select-block .search-row.freeinput .gbtn {
+      #tcm-search-wrapper .select-block .search-row.freeinput .gbtn {
         position: relative;
         top: 10px; }
-      #tcm-search-wrapper #select-block .search-row .select {
+      #tcm-search-wrapper .select-block .search-row .select {
         width: 70%; }
-      #tcm-search-wrapper #select-block .search-row .gbtn {
+      #tcm-search-wrapper .select-block .search-row .gbtn {
         margin-left: 15px;
         color: #fff;
         background: linear-gradient(45deg, #558b2f 30%, #7cb342 90%);
         letter-spacing: 2px; }
-        #tcm-search-wrapper #select-block .search-row .gbtn:hover {
+        #tcm-search-wrapper .select-block .search-row .gbtn:hover {
           background: linear-gradient(45deg, #33691e 30%, #558b2f 90%); }
-      #tcm-search-wrapper #select-block .search-row .free-input {
+      #tcm-search-wrapper .select-block .search-row .free-input {
         width: 70%;
         height: 36px;
         margin: 0;
         padding: 0; }
-        #tcm-search-wrapper #select-block .search-row .free-input label.MuiFormLabel-focused-116 {
+        #tcm-search-wrapper .select-block .search-row .free-input label.MuiFormLabel-focused-116 {
           color: #558b2f; }
-        #tcm-search-wrapper #select-block .search-row .free-input div:after {
+        #tcm-search-wrapper .select-block .search-row .free-input div:after {
           background: linear-gradient(45deg, #558b2f 30%, #7cb342 90%); }
   #tcm-search-wrapper #result-block {
     padding: 0 15px; }

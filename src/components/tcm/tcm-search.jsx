@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import SHL from "./data/ShangHanLun.js";
+import SHL from "./data/shangHanLun.js";
 import JKYL from "./data/jinKuiYaoLue.js";
 import SNBCJ from "./data/shenNongBenCaoJing.js";
 import ZYLCESWN from "./data/zhongYiLinChuangErShiWuNian.js";
@@ -11,7 +11,7 @@ import {
   herbsOptions,
   symptomOptions,
   prescriptionOptions
-} from "./data/SearchWords.js";
+} from "./data/searchWords.js";
 
 import Select from "react-select";
 import "react-select/dist/react-select.css";

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import SHL from "./data/shangHanLun.js";
+import SHL from "./data/ShangHanLun.js";
 import JKYL from "./data/jinKuiYaoLue.js";
 import SNBCJ from "./data/shenNongBenCaoJing.js";
 import ZYLCESWN from "./data/zhongYiLinChuangErShiWuNian.js";
@@ -11,7 +11,7 @@ import {
   herbsOptions,
   symptomOptions,
   prescriptionOptions
-} from "./data/searchWords.js";
+} from "./data/SearchWords.js";
 
 import Select from "react-select";
 import "react-select/dist/react-select.css";
@@ -229,15 +229,9 @@ class TCMSearch extends Component {
 
         return (
           <div key={title}>
-            {shouldShowChapter
-              ? <h3>
-                  {chapter}
-                </h3>
-              : null}
+            {shouldShowChapter ? <h3>{chapter}</h3> : null}
 
-            <h4>
-              {title}
-            </h4>
+            <h4>{title}</h4>
 
             <div className="sentences">
               {sentences.map((sentence, j) => {
@@ -283,11 +277,7 @@ class TCMSearch extends Component {
                         );
                       } else if (k === arr.length - 1) {
                         // 句尾
-                        return (
-                          <span key={cv + k}>
-                            {cv}
-                          </span>
-                        );
+                        return <span key={cv + k}>{cv}</span>;
                       }
                     })}
                   </div>
@@ -301,9 +291,7 @@ class TCMSearch extends Component {
 
       return (
         <div key={bookName} className="books-block">
-          <h2>
-            {bookName}
-          </h2>
+          <h2>{bookName}</h2>
           <div className={`lists-block ${haveChapter ? "haveChapter" : ""}`}>
             {lists.length === 0 ? <p className="no-data">本書查無此關鍵字</p> : lists}
           </div>
@@ -577,9 +565,7 @@ class TCMSearch extends Component {
           </div>
         </div>
 
-        <div id="result-block">
-          {this.renderResult()}
-        </div>
+        <div id="result-block">{this.renderResult()}</div>
       </div>
     );
   }

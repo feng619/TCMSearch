@@ -1,14 +1,14 @@
 // @flow
 import React from "react";
 import { Route } from "react-router-dom";
-import TCMSearch from "./tcm/tcm-search";
-import Port from "./port";
+import TCMSearch from "./search/tcm-search";
+import TCMml from "./ml/tcm-ml";
 
 const App = () => {
   return (
     <div>
       <Route exact path="/" component={TCMSearch} />
-      <Route path="/port" component={Port} />
+      <Route path="/tcmml" component={TCMml} />
     </div>
   );
 };

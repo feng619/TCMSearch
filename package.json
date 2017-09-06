@@ -9,7 +9,9 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "history": "^4.6.1",
+    "machine_learning": "^0.1.1",
     "material-ui": "^1.0.0-beta.6",
+    "material-ui-icons": "^1.0.0-beta.5",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",

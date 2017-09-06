@@ -1,8 +1,11 @@
 // @flow
 import React, { Component } from "react";
-import SHL from "./data/shangHanLun.js";
+import Appbar from "../appbar";
+import SHL from "./data/ShangHanLun.js";
 import JKYL from "./data/jinKuiYaoLue.js";
+import TTGJ from "./data/tangTouGeJue.js";
 import SNBCJ from "./data/shenNongBenCaoJing.js";
+import YXF from "./data/yaoXingFu.js";
 import ZYLCESWN from "./data/zhongYiLinChuangErShiWuNian.js";
 import JFSYL from "./data/jingFangShiYanLu.js";
 import SHMYYAJX from "./data/shangHanMingYiYanAnJingXuan.js";
@@ -11,22 +14,18 @@ import {
   herbsOptions,
   symptomOptions,
   prescriptionOptions
-} from "./data/searchWords.js";
+} from "./data/SearchWords.js";
 
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
-import AppBar from "material-ui/AppBar";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
+import Search from "material-ui-icons/Search";
 import { FormGroup, FormControlLabel } from "material-ui/Form";
 import Checkbox from "material-ui/Checkbox";
 import TextField from "material-ui/TextField";
 
-import tcmWhite from "../../images/components/tcm/tcm_white.png";
-
-import "../../style/components/tcm/tcm-search.css";
+import "../../style/components/search/tcm-search.css";
 
 class TCMSearch extends Component {
   constructor(props) {
@@ -35,13 +34,15 @@ class TCMSearch extends Component {
       // for checkbox
       checkedSHL: true,
       checkedJKYL: false,
+      checkedTTGJ: false,
       checkedSNBCJ: false,
+      checkedYXF: false,
       checkedZYLCESWN: true,
       checkedJFSYL: true,
       checkedSHMYYAJX: true,
       checkedBHYJ: false,
       // for search
-      booksArr: [SHL, JKYL, SNBCJ, ZYLCESWN, JFSYL, SHMYYAJX, BHYJ],
+      booksArr: [SHL, JKYL, TTGJ, SNBCJ, YXF, ZYLCESWN, JFSYL, SHMYYAJX, BHYJ],
       namesArr: null,
       // herb
       selectHerbsValue: null,
@@ -102,7 +103,9 @@ class TCMSearch extends Component {
     const {
       checkedSHL,
       checkedJKYL,
+      checkedTTGJ,
       checkedSNBCJ,
+      checkedYXF,
       checkedZYLCESWN,
       checkedJFSYL,
       checkedSHMYYAJX,
@@ -147,7 +150,9 @@ class TCMSearch extends Component {
       tfArr = [
         checkedSHL,
         checkedJKYL,
+        checkedTTGJ,
         checkedSNBCJ,
+        checkedYXF,
         checkedZYLCESWN,
         checkedJFSYL,
         checkedSHMYYAJX,
@@ -228,7 +233,7 @@ class TCMSearch extends Component {
         oldChapter = chapter;
 
         return (
-          <div key={title}>
+          <div key={title} className="section">
             {shouldShowChapter ? <h3>{chapter}</h3> : null}
 
             <h4>{title}</h4>
@@ -337,7 +342,9 @@ class TCMSearch extends Component {
     const {
       checkedSHL,
       checkedJKYL,
+      checkedTTGJ,
       checkedSNBCJ,
+      checkedYXF,
       checkedZYLCESWN,
       checkedJFSYL,
       checkedSHMYYAJX,
@@ -351,17 +358,7 @@ class TCMSearch extends Component {
 
     return (
       <div id="tcm-search-wrapper">
-        <AppBar position="static" className="appbar">
-          <Toolbar>
-            <div id="logo">
-              <img src={tcmWhite} />
-            </div>
-            <Typography type="title" color="inherit">
-              小宇宙中醫古文查詢系統
-            </Typography>
-          </Toolbar>
-        </AppBar>
-
+        <Appbar />
         <div id="option-block">
           <h2>搜尋選項</h2>
           <h4>請勾選要納入搜尋的書籍</h4>
@@ -392,6 +389,20 @@ class TCMSearch extends Component {
             />
           </FormGroup>
           <FormGroup row className="checkbox-row">
+            <h4>方論</h4>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  className={checkedTTGJ ? "checked-style" : ""}
+                  checked={checkedTTGJ}
+                  onChange={this.handleCheckboxChange.bind(this, "checkedTTGJ")}
+                  value="checkedTTGJ"
+                />
+              }
+              label="湯頭歌訣"
+            />
+          </FormGroup>
+          <FormGroup row className="checkbox-row">
             <h4>本草</h4>
             <FormControlLabel
               control={
@@ -406,6 +417,17 @@ class TCMSearch extends Component {
                 />
               }
               label="神農本草經"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  className={checkedYXF ? "checked-style" : ""}
+                  checked={checkedYXF}
+                  onChange={this.handleCheckboxChange.bind(this, "checkedYXF")}
+                  value="checkedYXF"
+                />
+              }
+              label="藥性賦"
             />
           </FormGroup>
           <FormGroup row className="checkbox-row">
@@ -486,7 +508,8 @@ class TCMSearch extends Component {
               className="gbtn"
               onClick={this.onSearch.bind(this, "search_herb")}
             >
-              草本查詢
+              <Search />
+              <span className="btn-name">草本查詢</span>
             </Button>
           </div>
           <div className="search-row">
@@ -504,7 +527,8 @@ class TCMSearch extends Component {
               className="gbtn"
               onClick={this.onSearch.bind(this, "search_symptom")}
             >
-              症狀查詢
+              <Search />
+              <span className="btn-name">症狀查詢</span>
             </Button>
           </div>
           <div className="search-row">
@@ -522,7 +546,8 @@ class TCMSearch extends Component {
               className="gbtn"
               onClick={this.onSearch.bind(this, "search_prescription")}
             >
-              方劑查詢
+              <Search />
+              <span className="btn-name">方劑查詢</span>
             </Button>
           </div>
 
@@ -538,7 +563,8 @@ class TCMSearch extends Component {
               className="gbtn"
               onClick={this.onSearch.bind(this, "search_free")}
             >
-              自訂查詢
+              <Search />
+              <span className="btn-name">自訂查詢</span>
             </Button>
           </div>
         </div>
@@ -560,7 +586,8 @@ class TCMSearch extends Component {
               className="gbtn"
               onClick={this.onSearch.bind(this, "search_multi")}
             >
-              複合查詢
+              <Search />
+              <span className="btn-name">複合查詢</span>
             </Button>
           </div>
         </div>

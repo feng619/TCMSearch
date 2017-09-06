@@ -1,0 +1,91 @@
+#tcm-ml-wrapper {
+  width: 100%;
+  height: 100%; }
+  #tcm-ml-wrapper .appbar {
+    background: linear-gradient(45deg, #558b2f 30%, #7cb342 90%);
+    letter-spacing: 3px; }
+    #tcm-ml-wrapper .appbar h2 {
+      font-size: 22px; }
+    #tcm-ml-wrapper .appbar #logo {
+      width: 32px;
+      height: 32px;
+      margin-right: 15px; }
+      #tcm-ml-wrapper .appbar #logo img {
+        width: 100%;
+        height: 100%; }
+  #tcm-ml-wrapper #select-block {
+    padding: 0 15px; }
+    #tcm-ml-wrapper #select-block h2 {
+      font-size: 22px;
+      line-height: 50px;
+      letter-spacing: 3px; }
+    #tcm-ml-wrapper #select-block h4 {
+      margin-left: 15px; }
+    #tcm-ml-wrapper #select-block #class-block-wrapper {
+      margin-left: 30px; }
+      #tcm-ml-wrapper #select-block #class-block-wrapper .class-block {
+        display: flex;
+        margin: 5px 0;
+        padding: 5px 0;
+        border-bottom: 1px dashed #ddd; }
+        #tcm-ml-wrapper #select-block #class-block-wrapper .class-block h4 {
+          width: 70px;
+          min-width: 70px;
+          margin: 10px 15px 10px 0; }
+        #tcm-ml-wrapper #select-block #class-block-wrapper .class-block .symptom-block-wrapper .symptom-block {
+          display: inline-flex;
+          margin-right: 15px; }
+          #tcm-ml-wrapper #select-block #class-block-wrapper .class-block .symptom-block-wrapper .symptom-block h5 {
+            margin-right: 15px;
+            line-height: 19px; }
+          #tcm-ml-wrapper #select-block #class-block-wrapper .class-block .symptom-block-wrapper .symptom-block .symptom-input {
+            width: 30px;
+            height: 28px;
+            position: relative;
+            top: 4px; }
+            #tcm-ml-wrapper #select-block #class-block-wrapper .class-block .symptom-block-wrapper .symptom-block .symptom-input:after {
+              background-color: #558b2f; }
+    #tcm-ml-wrapper #select-block #btn-wrapper {
+      margin: 15px; }
+      #tcm-ml-wrapper #select-block #btn-wrapper .gbtn {
+        width: 125px;
+        margin-left: 15px;
+        padding: 10px 12px;
+        color: #fff;
+        background: linear-gradient(45deg, #558b2f 30%, #7cb342 90%);
+        letter-spacing: 2px; }
+        #tcm-ml-wrapper #select-block #btn-wrapper .gbtn:hover {
+          background: linear-gradient(45deg, #33691e 30%, #558b2f 90%); }
+        #tcm-ml-wrapper #select-block #btn-wrapper .gbtn.gbtn-small {
+          width: 60px; }
+        #tcm-ml-wrapper #select-block #btn-wrapper .gbtn span.btn-name {
+          padding-left: 5px; }
+  #tcm-ml-wrapper #result-block {
+    padding: 20px 0;
+    margin: 20px 15px;
+    border-top: 1px solid #558b2f; }
+    #tcm-ml-wrapper #result-block h4 {
+      margin-left: 15px; }
+    #tcm-ml-wrapper #result-block #result-row-wrapper {
+      margin-left: 30px; }
+      #tcm-ml-wrapper #result-block #result-row-wrapper .result-row {
+        display: flex;
+        height: 40px;
+        line-height: 40px;
+        opacity: 0.7; }
+        #tcm-ml-wrapper #result-block #result-row-wrapper .result-row.hide {
+          display: none; }
+        #tcm-ml-wrapper #result-block #result-row-wrapper .result-row.low {
+          opacity: 0.3; }
+        #tcm-ml-wrapper #result-block #result-row-wrapper .result-row.high {
+          opacity: 1; }
+        #tcm-ml-wrapper #result-block #result-row-wrapper .result-row .result-idx {
+          width: 40px;
+          font-size: 18px; }
+        #tcm-ml-wrapper #result-block #result-row-wrapper .result-row .result-fangname {
+          width: 180px;
+          font-size: 18px; }
+        #tcm-ml-wrapper #result-block #result-row-wrapper .result-row .result-value {
+          width: 36px;
+          text-align: right;
+          font-size: 18px; }

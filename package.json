@@ -35,7 +35,8 @@
     "flow-bin": "^0.47.0",
     "node-sass-chokidar": "0.0.2",
     "npm-run-all": "^4.0.2",
-    "react-scripts": "1.0.7"
+    "react-scripts": "1.0.7",
+    "uglifyjs-webpack-plugin": "^1.0.0-beta.2"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/scss -o src/style",
